@@ -21,6 +21,9 @@ RUN \
  wget \
   -nv \
   https://downloads.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/$TARBALL && \
- tar -xjf $TARBALL && \
+ tar \
+  --touch --no-same-owner --no-same-permissions \
+  --delay-directory-restore --no-overwrite-dir --ignore-command-error \
+  -xjf $TARBALL && \
  rm $TARBALL && \
  mv *ImageBuilder* image-builder
