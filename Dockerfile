@@ -12,18 +12,20 @@ RUN \
 RUN \
  apt-get install -fy --no-install-recommends  \
  ca-cacert subversion build-essential libncurses5-dev zlib1g-dev \
- gawk git ccache gettext libssl-dev xsltproc wget && \
+ gawk git ccache gettext libssl-dev xsltproc wget \
+ unzip time python file \
+ && \
  rm -rf /var/lib/apt/lists/*
 
-ENV TARBALL "OpenWrt-ImageBuilder-15.05.1-ar71xx-generic.Linux-x86_64.tar.bz2"
+ENV TARBALL "openwrt-imagebuilder-18.06.1-ar71xx-tiny.Linux-x86_64.tar.xz"
 
 RUN \
  wget \
   -nv \
-  https://downloads.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/$TARBALL && \
+  https://downloads.openwrt.org/releases/18.06.1/targets/ar71xx/tiny/$TARBALL && \
  tar \
   --touch --no-same-owner --no-same-permissions \
   --delay-directory-restore --no-overwrite-dir --ignore-command-error \
-  -xjf $TARBALL && \
+  -xJf $TARBALL && \
  rm $TARBALL && \
- mv *ImageBuilder* image-builder
+ mv *openwrt-imagebuilder-* image-builder
